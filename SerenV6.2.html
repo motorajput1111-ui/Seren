@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>babu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system}
+
+body{
+  height:100vh;
+  background:#ffe6ee;
+  overflow:hidden;
+}
+
+/* Header */
+.header{
+  height:60px;
+  background:#f7a7c0;
+  display:flex;
+  align-items:center;
+  padding:0 12px;
+  color:white;
+}
+.dp{
+  width:42px;height:42px;
+  border-radius:50%;
+  background:url("https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=200&q=80") center/cover;
+  margin-right:10px;
+}
+.name{
+  font-weight:600;
+}
+.status{
+  font-size:12px;
+  opacity:.9;
+}
+
+/* Screen */
+.screen{
+  height:calc(100vh - 60px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+/* Bubble */
+.bubble{
+  max-width:80%;
+  padding:12px 16px;
+  border-radius:12px;
+  background:white;
+  font-size:18px;
+  animation:pop .3s ease;
+}
+.me{
+  background:#dcf8c6;
+}
+@keyframes pop{
+  from{transform:scale(.95);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+/* Typing */
+.typing{
+  font-size:13px;
+  opacity:.6;
+}
+.dots::after{
+  content:'';
+  animation:dots 1.5s infinite;
+}
+@keyframes dots{
+  0%{content:''}
+  33%{content:'.'}
+  66%{content:'..'}
+  100%{content:'...'}
+}
+
+/* Buttons */
+.reply{
+  margin-top:18px;
+  display:flex;
+  gap:15px;
+  justify-content:center;
+}
+.reply button{
+  padding:10px 22px;
+  border:none;
+  border-radius:20px;
+  font-size:15px;
+}
+.yes{background:#25d366;color:white}
+.no{background:#bbb}
+
+/* Ring + kiss */
+.center{text-align:center}
+.ring{font-size:60px;animation:pulse 1.5s infinite}
+.kiss{font-size:40px}
+@keyframes pulse{50%{transform:scale(1.2)}}
+
+/* Roses */
+.rose{
+  position:absolute;
+  top:-40px;
+  font-size:22px;
+  animation:fall 10s linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(120vh) rotate(360deg)}
+}
+
+/* Hint */
+.tap{
+  position:fixed;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:13px;
+  opacity:.5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="dp"></div>
+  <div>
+    <div class="name">babu</div>
+    <div class="status">online</div>
+  </div>
+</div>
+
+<audio id="yesVoice">
+  <source src="yes-whisper.mp3" type="audio/mpeg">
+</audio>
+
+<div class="screen" id="screen"></div>
+<div class="tap">tap anywhere</div>
+
+<script>
+const screen=document.getElementById("screen");
+
+const messages=[
+ "Hey… 💗",
+ "I wanted to say something honestly.",
+ "You make my heart feel calm and safe.",
+ "With you, everything feels warmer.",
+ "So I need to ask you something…"
+];
+
+let i=0;
+let secretTap=0;
+
+function typingThen(text){
+  screen.innerHTML=`<div class="typing">babu is typing<span class="dots"></span></div>`;
+  setTimeout(()=>{
+    screen.innerHTML=`<div class="bubble">${text}</div>`;
+  },1200);
+}
+
+typingThen(messages[0]);
+
+document.body.addEventListener("click",()=>{
+  if(i < messages.length-1){
+    i++;
+    typingThen(messages[i]);
+  }else if(i === messages.length-1){
+    i++;
+    proposal();
+  }
+});
+
+function proposal(){
+  screen.innerHTML=`
+    <div>
+      <div class="bubble">
+        Will you be my girlfriend? 💕
+      </div>
+      <div class="reply">
+        <button class="yes" onclick="yes()">Yes</button>
+        <button class="no" onclick="no()">No</button>
+      </div>
+    </div>
+  `;
+}
+
+function yes(){
+  document.getElementById("yesVoice").play();
+  screen.innerHTML=`
+    <div class="center">
+      <div class="ring">💍</div>
+      <div class="kiss">💋🤗</div>
+      <div class="bubble me">
+        You just made my heart choose you 💗
+      </div>
+    </div>
+  `;
+  setTimeout(secret1,3500);
+}
+
+function secret1(){
+  screen.innerHTML=`
+    <div class="bubble">
+      Secret 🌌<br>
+      From today… you’re my favorite person 💞
+    </div>
+  `;
+  secretTap=1;
+}
+
+document.body.addEventListener("dblclick",()=>{
+  if(secretTap===1){
+    screen.innerHTML=`
+      <div class="bubble">
+        Hidden secret 🤍<br>
+        No matter what happens,  
+        you’ll always be special to me.
+      </div>
+    `;
+    secretTap=2;
+  }
+});
+
+function no(){
+  screen.innerHTML=`
+    <div class="bubble">
+      Thank you for being honest 🤍<br>
+      I respect your feelings completely.
+    </div>
+  `;
+}
+
+/* Roses */
+setInterval(()=>{
+  const r=document.createElement("div");
+  r.className="rose";
+  r.innerHTML="🌹";
+  r.style.left=Math.random()*100+"vw";
+  r.style.animationDuration=6+Math.random()*6+"s";
+  document.body.appendChild(r);
+  setTimeout(()=>r.remove(),12000);
+},800);
+</script>
+
+</body>
+</html>
