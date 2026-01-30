@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Seren 💗</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#ffd1dc,#ffe6ee,#ffd9ec);
+  overflow:hidden;
+  color:#333;
+}
+
+/* Falling roses */
+.rose{
+  position:absolute;
+  top:-50px;
+  font-size:22px;
+  animation:fall 10s linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(120vh) rotate(360deg)}
+}
+
+/* Name + watermark */
+.name{position:fixed;top:15px;right:20px;opacity:.7}
+.watermark{position:fixed;bottom:15px;right:20px;opacity:.5;font-size:14px}
+
+/* Pages */
+.page{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
+  font-size:26px;
+  line-height:1.6;
+  opacity:0;
+  pointer-events:none;
+}
+.page.active{opacity:1;pointer-events:auto}
+
+/* Writing animation */
+.type{
+  overflow:hidden;
+  white-space:nowrap;
+  border-right:2px solid #ff7aa2;
+  animation:typing 3s steps(40,end),blink .8s infinite;
+}
+@keyframes typing{from{width:0}to{width:100%}}
+@keyframes blink{50%{border-color:transparent}}
+
+/* Buttons */
+.buttons button{
+  margin:15px;
+  padding:12px 26px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+}
+.yes{background:#ff4f87;color:white}
+.no{background:#aaa;color:white}
+
+/* Ring + kiss */
+.ring{font-size:60px;animation:pop 1.5s infinite}
+@keyframes pop{50%{transform:scale(1.2)}}
+.kiss{font-size:40px;margin-top:10px}
+
+.tap{
+  position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:14px;
+  opacity:.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="name">Seren 💗</div>
+<div class="watermark">babu</div>
+
+<audio id="yesVoice">
+  <source src="yes-whisper.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGES -->
+<div class="page active type">
+  Hey Seren… I’ve been wanting to tell you something 💗
+</div>
+
+<div class="page type">
+  You make my days softer and my nights calmer ✨
+</div>
+
+<div class="page type">
+  With you, even silence feels warm and safe 🤍
+</div>
+
+<div class="page type">
+  I don’t know what the future holds,  
+  but I know I want you in it 🌙
+</div>
+
+<div class="page">
+  Seren… will you be my girlfriend? 💕
+  <div class="buttons">
+    <button class="yes" onclick="yes()">Yes 💖</button>
+    <button class="no" onclick="no()">No 🤍</button>
+  </div>
+</div>
+
+<!-- YES PAGE -->
+<div class="page" id="yesPage">
+  <div>
+    <div class="ring">💍</div>
+    <div class="kiss">💋🤗</div><br>
+    You just turned a feeling  
+    into something beautiful 💗
+  </div>
+</div>
+
+<!-- SECRET ENDING -->
+<div class="page type" id="secretPage">
+  This is our secret now… 🌌  
+  You’re my favorite feeling, Seren 💞
+</div>
+
+<!-- NO PAGE -->
+<div class="page type" id="noPage">
+  Thank you for being honest 🤍  
+  I respect your feelings and wish you happiness ✨
+</div>
+
+<div class="tap">Tap anywhere 🌸</div>
+
+<script>
+let pages=document.querySelectorAll('.page');
+let i=0;
+
+document.body.addEventListener('click',()=>{
+  if(i < pages.length-4){
+    pages[i].classList.remove('active');
+    i++;
+    pages[i].classList.add('active');
+  }
+});
+
+function hideAll(){
+  pages.forEach(p=>p.classList.remove('active'));
+}
+
+function yes(){
+  hideAll();
+  document.getElementById("yesPage").classList.add("active");
+  document.getElementById("yesVoice").play();
+
+  setTimeout(()=>{
+    hideAll();
+    document.getElementById("secretPage").classList.add("active");
+  },4000);
+}
+
+function no(){
+  hideAll();
+  document.getElementById("noPage").classList.add("active");
+}
+
+/* Roses */
+setInterval(()=>{
+  const r=document.createElement("div");
+  r.className="rose";
+  r.innerHTML="🌹";
+  r.style.left=Math.random()*100+"vw";
+  r.style.animationDuration=6+Math.random()*6+"s";
+  document.body.appendChild(r);
+  setTimeout(()=>r.remove(),12000);
+},700);
+</script>
+
+</body>
+</html>
