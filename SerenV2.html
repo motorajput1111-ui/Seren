@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Seren ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    background:radial-gradient(circle at top,#1a1a2e,#000);
+    overflow:hidden;
+    color:white;
+}
+
+/* Stars */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:url("https://i.imgur.com/9QZ7KkC.png");
+    opacity:0.25;
+    animation:stars 60s linear infinite;
+}
+@keyframes stars{
+    from{background-position:0 0;}
+    to{background-position:10000px 5000px;}
+}
+
+/* Name */
+.name{
+    position:fixed;
+    top:15px;
+    right:20px;
+    font-size:18px;
+    opacity:.8;
+}
+
+/* Watermark */
+.watermark{
+    position:fixed;
+    bottom:15px;
+    right:20px;
+    font-size:14px;
+    opacity:.5;
+}
+
+/* Page */
+.page{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
+    font-size:26px;
+    line-height:1.5;
+    opacity:0;
+    pointer-events:none;
+}
+
+.page.active{
+    opacity:1;
+    pointer-events:auto;
+}
+
+/* Animations */
+.fade{animation:fade 2s;}
+@keyframes fade{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:none;}
+}
+
+.type{
+    overflow:hidden;
+    white-space:nowrap;
+    border-right:2px solid pink;
+    animation:typing 3s steps(40,end),blink .8s infinite;
+}
+@keyframes typing{from{width:0}to{width:100%}}
+@keyframes blink{50%{border-color:transparent}}
+
+.zoom{animation:zoom 2s;}
+@keyframes zoom{
+    from{transform:scale(.8);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+.heartbeat{
+    animation:beat 1.5s infinite;
+}
+@keyframes beat{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.08)}
+}
+
+/* Hint */
+.tap{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:14px;
+    opacity:.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="name">Seren ❤️</div>
+<div class="watermark">babu</div>
+
+<!-- SONG -->
+<audio autoplay loop>
+  <source src="" type="audio/mpeg">
+</audio>
+<div style="position:fixed;bottom:50px;left:50%;transform:translateX(-50%);font-size:12px;opacity:.6;">
+Song: Her – JVKE
+</div>
+
+<div class="page active fade">
+    Hey Seren… ❤️<br>
+    ek choti si baat dil se kehni hai
+</div>
+
+<div class="page type">
+    Tumhari muskurahat meri duniya ko roshan kar deti hai ✨
+</div>
+
+<div class="page zoom">
+    Main perfect nahi hoon,<br>
+    par tumhare liye hamesha sincere rahunga 💕
+</div>
+
+<div class="page fade heartbeat">
+    Tumhara naam sochta hoon<br>
+    aur dil bina wajah tez dhadakne lagta hai 💓
+</div>
+
+<div class="page zoom">
+    Mujhe future ka nahi pata…<br>
+    bas itna pata hai ke usme tum chahiye 🌙
+</div>
+
+<div class="page type">
+    Har din, har pal,<br>
+    main tumhara saath nibhana chahta hoon 🤍
+</div>
+
+<div class="page fade heartbeat">
+    Seren… 💖<br>
+    Will you be mine?
+</div>
+
+<div class="page zoom">
+    Thank you for reading ✨<br>
+    Tum meri sabse khoobsurat feeling ho
+</div>
+
+<div class="tap">Tap anywhere 💫</div>
+
+<script>
+let pages=document.querySelectorAll('.page');
+let i=0;
+document.body.addEventListener('click',()=>{
+    pages[i].classList.remove('active');
+    i++;
+    if(i<pages.length){
+        pages[i].classList.add('active');
+    }
+});
+</script>
+
+</body>
+</html>
