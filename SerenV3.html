@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Seren ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{
+    height:100vh;
+    background:radial-gradient(circle at top,#1b1b3a,#000);
+    overflow:hidden;
+    color:#fff;
+}
+
+/* Floating hearts background */
+.heart{
+    position:absolute;
+    bottom:-50px;
+    font-size:20px;
+    animation:float 8s linear infinite;
+    opacity:.6;
+}
+@keyframes float{
+    from{transform:translateY(0) scale(1)}
+    to{transform:translateY(-120vh) scale(1.5);opacity:0}
+}
+
+/* Name & watermark */
+.name{position:fixed;top:15px;right:20px;opacity:.8}
+.watermark{position:fixed;bottom:15px;right:20px;opacity:.5;font-size:14px}
+
+/* Pages */
+.page{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
+    font-size:26px;
+    line-height:1.5;
+    opacity:0;
+    pointer-events:none;
+}
+.page.active{opacity:1;pointer-events:auto}
+
+/* Animations */
+.fade{animation:fade 2s}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1}}
+
+.zoom{animation:zoom 2s}
+@keyframes zoom{from{opacity:0;transform:scale(.8)}to{opacity:1}}
+
+.heartbeat{animation:beat 1.5s infinite}
+@keyframes beat{50%{transform:scale(1.08)}}
+
+.type{
+    overflow:hidden;
+    white-space:nowrap;
+    border-right:2px solid pink;
+    animation:typing 3s steps(40,end),blink .8s infinite;
+}
+@keyframes typing{from{width:0}to{width:100%}}
+@keyframes blink{50%{border-color:transparent}}
+
+/* Buttons */
+.buttons button{
+    margin:15px;
+    padding:12px 25px;
+    border:none;
+    border-radius:25px;
+    font-size:16px;
+    cursor:pointer;
+}
+.yes{background:#ff4d6d;color:white}
+.no{background:#444;color:white}
+
+.tap{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:14px;
+    opacity:.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="name">Seren ❤️</div>
+<div class="watermark">babu</div>
+
+<!-- Song info -->
+<div style="position:fixed;bottom:55px;left:50%;transform:translateX(-50%);font-size:12px;opacity:.6">
+Song: Her – JVKE
+</div>
+
+<!-- Pages -->
+<div class="page active type">
+    Hey Seren… ❤️  
+    I have something special to tell you
+</div>
+
+<div class="page fade">
+    Every time you smile,  
+    my whole world feels brighter ✨
+</div>
+
+<div class="page zoom">
+    You make ordinary moments  
+    feel magical just by being there 💫
+</div>
+
+<div class="page fade heartbeat">
+    I don’t promise perfection,  
+    but I promise honesty and care 🤍
+</div>
+
+<div class="page zoom">
+    When I think about the future,  
+    you’re the first name in my heart 🌙
+</div>
+
+<div class="page fade heartbeat">
+    Seren…  
+    will you be my girlfriend? 💖
+    <div class="buttons">
+        <button class="yes" onclick="yes()">Yes 💕</button>
+        <button class="no" onclick="no()">No 🤍</button>
+    </div>
+</div>
+
+<!-- YES PAGE -->
+<div class="page zoom" id="yesPage">
+    You just made my heart smile in a way  
+    words can’t explain 💗  
+    I promise to cherish you, Seren ✨
+</div>
+
+<!-- SECRET ENDING -->
+<div class="page fade heartbeat" id="secret">
+    This is our little secret… 🤫💞  
+    From today, you’re not just a thought,  
+    you’re my favorite feeling ❤️
+</div>
+
+<!-- NO PAGE -->
+<div class="page fade" id="noPage">
+    Thank you for being honest 🤍  
+    Your feelings matter, and I respect you always.  
+    You’ll still be someone special to me ✨
+</div>
+
+<div class="tap">Tap anywhere 💫</div>
+
+<script>
+let pages=document.querySelectorAll('.page');
+let index=0;
+
+document.body.addEventListener('click',()=>{
+    if(index < pages.length-4){
+        pages[index].classList.remove('active');
+        index++;
+        pages[index].classList.add('active');
+    }
+});
+
+function yes(){
+    hideAll();
+    document.getElementById("yesPage").classList.add("active");
+    setTimeout(()=>{
+        hideAll();
+        document.getElementById("secret").classList.add("active");
+    },4000);
+}
+
+function no(){
+    hideAll();
+    document.getElementById("noPage").classList.add("active");
+}
+
+function hideAll(){
+    pages.forEach(p=>p.classList.remove('active'));
+}
+
+/* Hearts generator */
+setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=6+Math.random()*5+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),10000);
+},500);
+</script>
+
+</body>
+</html>
