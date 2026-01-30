@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Seren 💗</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#ffd1dc,#ffe6ee,#ffd9ec);
+  overflow:hidden;
+  color:#333;
+}
+
+/* Floating bubbles */
+.bubble{
+  position:absolute;
+  bottom:-100px;
+  width:40px;height:40px;
+  background:rgba(255,255,255,0.4);
+  border-radius:50%;
+  animation:float 16s linear infinite;
+}
+@keyframes float{
+  to{transform:translateY(-120vh)}
+}
+
+/* Falling roses */
+.rose{
+  position:absolute;
+  top:-50px;
+  font-size:22px;
+  animation:fall 10s linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(120vh) rotate(360deg)}
+}
+
+/* Header */
+.name{
+  position:fixed;
+  top:12px;
+  right:18px;
+  font-size:16px;
+  opacity:.7;
+}
+.watermark{
+  position:fixed;
+  bottom:12px;
+  right:18px;
+  font-size:13px;
+  opacity:.5;
+}
+
+/* Chat */
+.chat{
+  max-width:420px;
+  margin:70px auto;
+  padding:15px;
+}
+
+/* Messages */
+.msg{
+  max-width:80%;
+  margin:12px 0;
+  padding:12px 16px;
+  border-radius:18px;
+  animation:appear 1s forwards;
+  opacity:0;
+}
+@keyframes appear{to{opacity:1}}
+
+.left{
+  background:white;
+  border-bottom-left-radius:6px;
+}
+.right{
+  background:#ff7aa2;
+  color:white;
+  margin-left:auto;
+  border-bottom-right-radius:6px;
+}
+
+/* Typing indicator */
+.typing{
+  font-size:13px;
+  opacity:.6;
+  margin:8px;
+}
+.dots::after{
+  content:'';
+  animation:dots 1.5s infinite;
+}
+@keyframes dots{
+  0%{content:''}
+  33%{content:'.'}
+  66%{content:'..'}
+  100%{content:'...'}
+}
+
+/* Buttons */
+.buttons{
+  text-align:center;
+  margin-top:15px;
+}
+.buttons button{
+  padding:10px 22px;
+  border:none;
+  border-radius:25px;
+  font-size:15px;
+  margin:10px;
+  cursor:pointer;
+}
+.yes{background:#ff4f87;color:white}
+.no{background:#aaa;color:white}
+
+/* Ring & kiss */
+.ring{
+  font-size:60px;
+  text-align:center;
+  animation:pop 1.5s infinite;
+}
+@keyframes pop{
+  50%{transform:scale(1.2)}
+}
+.kiss{
+  font-size:40px;
+  animation:kiss 1.2s infinite;
+}
+@keyframes kiss{
+  50%{transform:scale(1.3)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="name">Seren 💗</div>
+<div class="watermark">babu</div>
+
+<audio id="yesVoice">
+  <source src="yes-whisper.mp3" type="audio/mpeg">
+</audio>
+
+<div class="chat" id="chat"></div>
+
+<script>
+const chat=document.getElementById("chat");
+
+const msgs=[
+ "Hey Seren… 💗",
+ "I’ve been meaning to tell you something…",
+ "You make everything feel calmer and warmer ✨",
+ "Talking to you feels like home 🤍"
+];
+
+let i=0;
+
+function typingIndicator(){
+ const t=document.createElement("div");
+ t.className="typing";
+ t.innerHTML="babu is typing<span class='dots'></span>";
+ chat.appendChild(t);
+ return t;
+}
+
+function addMessage(){
+ if(i<msgs.length){
+   const t=typingIndicator();
+   setTimeout(()=>{
+     t.remove();
+     const m=document.createElement("div");
+     m.className="msg left";
+     m.innerText=msgs[i];
+     chat.appendChild(m);
+     i++;
+     setTimeout(addMessage,1200);
+   },1200);
+ } else proposal();
+}
+
+addMessage();
+
+function proposal(){
+ const m=document.createElement("div");
+ m.className="msg left";
+ m.innerText="Seren… will you be my girlfriend? 💕";
+ chat.appendChild(m);
+
+ const btn=document.createElement("div");
+ btn.className="buttons";
+ btn.innerHTML=`
+  <button class="yes" onclick="yes()">Yes 💖</button>
+  <button class="no" onclick="no()">No 🤍</button>`;
+ chat.appendChild(btn);
+}
+
+function yes(){
+ chat.innerHTML="";
+ document.getElementById("yesVoice").play();
+
+ chat.innerHTML+=`
+  <div class="ring">💍</div>
+  <div class="kiss">💋🤗</div>
+  <div class="msg right">You just made my heart melt 💗</div>
+  <div class="msg left">This hug is just the beginning… 🌌</div>
+  <div class="msg left">You’re my favorite person now 💞</div>
+ `;
+}
+
+function no(){
+ chat.innerHTML="";
+ chat.innerHTML+=`
+  <div class="msg left">Thank you for being honest 🤍</div>
+  <div class="msg left">I respect your feelings completely.</div>
+  <div class="msg left">Wishing you happiness always ✨</div>
+ `;
+}
+
+/* Bubbles */
+setInterval(()=>{
+ const b=document.createElement("div");
+ b.className="bubble";
+ b.style.left=Math.random()*100+"vw";
+ b.style.animationDuration=10+Math.random()*10+"s";
+ document.body.appendChild(b);
+ setTimeout(()=>b.remove(),20000);
+},900);
+
+/* Roses */
+setInterval(()=>{
+ const r=document.createElement("div");
+ r.className="rose";
+ r.innerHTML="🌹";
+ r.style.left=Math.random()*100+"vw";
+ r.style.animationDuration=6+Math.random()*6+"s";
+ document.body.appendChild(r);
+ setTimeout(()=>r.remove(),12000);
+},700);
+</script>
+
+</body>
+</html>
