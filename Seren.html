@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hey Cutie 💖</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #1b1b3a, #000);
+  color: white;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Stars background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+                    radial-gradient(1.5px 1.5px at 70% 80%, #fff, transparent),
+                    radial-gradient(1px 1px at 40% 60%, #fff, transparent);
+  animation: twinkle 6s infinite alternate;
+}
+@keyframes twinkle {
+  from { opacity: .3; }
+  to { opacity: .8; }
+}
+
+/* Girlfriend name */
+.name {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 14px;
+  opacity: .8;
+}
+
+/* Watermark */
+.watermark {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 12px;
+  opacity: .4;
+}
+
+/* Heartbeat */
+.heart {
+  font-size: 60px;
+  animation: beat 1.5s infinite;
+}
+@keyframes beat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.container {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 20px;
+}
+
+button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  background: #ff4d6d;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255,77,109,.6);
+}
+button:hover {
+  transform: scale(1.05);
+}
+
+.fade {
+  animation: fade 0.6s;
+}
+@keyframes fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.small {
+  font-size: 12px;
+  opacity: .6;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="name">💌 My Girl</div>
+
+<div class="container">
+  <div class="heart">❤️</div>
+  <h1 id="title">Hey Cutiepie</h1>
+  <p id="text">Do you even know how cute you are?</p>
+
+  <button onclick="nextText()">let’s check</button>
+
+  <div class="small">🎵 Song: “her” — JVKE</div>
+</div>
+
+<div class="watermark">babu</div>
+
+<script>
+const messages = [
+  "I'm really sorry if I ever hurt you 💔",
+  "You are prettier than you think 🥺",
+  "Your smile can fix my worst days ✨",
+  "I feel lucky just thinking about you 💖",
+  "You are my favorite notification 📱",
+  "No one feels like you, no one 💫",
+  "Thank you for existing 🌸"
+];
+
+let i = 0;
+function nextText() {
+  const t = document.getElementById("text");
+  t.classList.remove("fade");
+  void t.offsetWidth;
+  t.classList.add("fade");
+  t.innerText = messages[i];
+  i = (i + 1) % messages.length;
+}
+</script>
+
+</body>
+</html>
