@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Seren ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{
+    height:100vh;
+    background:linear-gradient(120deg,#1f1c2c,#2a2342,#1b1b2f);
+    overflow:hidden;
+    color:#fff;
+}
+
+/* Cozy blur lights */
+.blur{
+    position:absolute;
+    width:300px;height:300px;
+    background:#ff7eb3;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:.25;
+    animation:move 20s infinite alternate;
+}
+.blur.b2{background:#65c7f7;top:60%;left:60%}
+@keyframes move{
+    from{transform:translate(0,0)}
+    to{transform:translate(100px,-120px)}
+}
+
+/* Name & watermark */
+.name{position:fixed;top:15px;right:20px;opacity:.8}
+.watermark{position:fixed;bottom:15px;right:20px;opacity:.5;font-size:14px}
+
+/* Pages */
+.page{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
+    font-size:26px;
+    line-height:1.6;
+    opacity:0;
+    pointer-events:none;
+}
+.page.active{opacity:1;pointer-events:auto}
+
+/* Text animations */
+.fade{animation:fade 2s}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1}}
+
+.slide{animation:slide 2s}
+@keyframes slide{from{opacity:0;transform:translateX(-30px)}to{opacity:1}}
+
+.type{
+    overflow:hidden;
+    white-space:nowrap;
+    border-right:2px solid #ff9ecb;
+    animation:typing 3s steps(40,end),blink .8s infinite;
+}
+@keyframes typing{from{width:0}to{width:100%}}
+@keyframes blink{50%{border-color:transparent}}
+
+/* Buttons */
+.buttons button{
+    margin:15px;
+    padding:12px 26px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+}
+.yes{background:#ff5e8a;color:white}
+.no{background:#444;color:white}
+
+/* Ring */
+.ring{
+    font-size:60px;
+    animation:ring 2s infinite;
+}
+@keyframes ring{
+    50%{transform:scale(1.15)}
+}
+
+.tap{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:14px;
+    opacity:.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="blur"></div>
+<div class="blur b2"></div>
+
+<div class="name">Seren ❤️</div>
+<div class="watermark">babu</div>
+
+<div style="position:fixed;bottom:55px;left:50%;transform:translateX(-50%);font-size:12px;opacity:.6">
+Song: Her – JVKE
+</div>
+
+<!-- Girl voice (replace src with ElevenLabs MP3) -->
+<audio id="yesVoice">
+  <source src="yes-whisper.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Pages -->
+<div class="page active type">
+    Hey Seren… ❤️  
+    there’s something I’ve been wanting to tell you
+</div>
+
+<div class="page fade">
+    You bring calm into my chaos  
+    and warmth into my days ✨
+</div>
+
+<div class="page slide">
+    With you, even silence  
+    feels comfortable and safe 🤍
+</div>
+
+<div class="page fade">
+    I don’t know where life will take us,  
+    but I know I’d love to walk with you 🌙
+</div>
+
+<div class="page fade">
+    Seren…  
+    will you be my girlfriend? 💖
+    <div class="buttons">
+        <button class="yes" onclick="yes()">Yes 💕</button>
+        <button class="no" onclick="no()">No 🤍</button>
+    </div>
+</div>
+
+<!-- YES -->
+<div class="page fade" id="yesPage">
+    <div>
+        <div class="ring">💍</div><br>
+        You just said yes…  
+        and my heart chose you forever 💗
+    </div>
+</div>
+
+<!-- SECRET 1 -->
+<div class="page fade" id="secret1">
+    This moment is ours 🌌  
+    soft, quiet, and full of promise ✨
+</div>
+
+<!-- SECRET 2 -->
+<div class="page fade" id="secret2">
+    From today, Seren…  
+    you’re my favorite thought before sleep 💞
+</div>
+
+<!-- NO -->
+<div class="page fade" id="noPage">
+    Thank you for being honest 🤍  
+    I respect your feelings deeply,  
+    and I’ll always wish you happiness ✨
+</div>
+
+<div class="tap">Tap anywhere 💫</div>
+
+<script>
+let pages=document.querySelectorAll('.page');
+let i=0;
+
+document.body.addEventListener('click',()=>{
+    if(i < pages.length-5){
+        pages[i].classList.remove('active');
+        i++;
+        pages[i].classList.add('active');
+    }
+});
+
+function hideAll(){
+    pages.forEach(p=>p.classList.remove('active'));
+}
+
+function yes(){
+    hideAll();
+    document.getElementById("yesPage").classList.add("active");
+    document.getElementById("yesVoice").play();
+
+    setTimeout(()=>{
+        hideAll();
+        document.getElementById("secret1").classList.add("active");
+    },4000);
+
+    setTimeout(()=>{
+        hideAll();
+        document.getElementById("secret2").classList.add("active");
+    },8000);
+}
+
+function no(){
+    hideAll();
+    document.getElementById("noPage").classList.add("active");
+}
+</script>
+
+</body>
+</html>
